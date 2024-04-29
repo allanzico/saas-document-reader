@@ -7,10 +7,10 @@ import {
   RotateCw,
   Search,
 } from 'lucide-react'
-// import { Document, Page, pdfjs } from 'react-pdf'
+import { Document, Page, pdfjs } from 'react-pdf'
 
-// import 'react-pdf/dist/Page/AnnotationLayer.css'
-// import 'react-pdf/dist/Page/TextLayer.css'
+import 'react-pdf/dist/Page/AnnotationLayer.css'
+import 'react-pdf/dist/Page/TextLayer.css'
 import { useToast } from './ui/use-toast'
 
 import { useResizeDetector } from 'react-resize-detector'
@@ -30,10 +30,10 @@ import {
   DropdownMenuTrigger,
 } from './ui/dropdown-menu'
 
-// import SimpleBar from 'simplebar-react'
-// import PdfFullscreen from './PdfFullscreen'
+import SimpleBar from 'simplebar-react'
+import PdfFullscreen from './PdfFullscreen'
 
-// pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 
 interface PdfRendererProps {
   url: string
@@ -179,12 +179,12 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
             <RotateCw className='h-4 w-4' />
           </Button>
 
-          {/* <PdfFullscreen fileUrl={url} /> */}
+          <PdfFullscreen fileUrl={url} />
         </div>
       </div>
 
       <div className='flex-1 w-full max-h-screen'>
-        {/* <SimpleBar
+        <SimpleBar
           autoHide={false}
           className='max-h-[calc(100vh-10rem)]'>
           <div ref={ref}>
@@ -201,7 +201,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
                   variant: 'destructive',
                 })
               }}
-              onLoadSuccess={({ numPages }) =>
+              onLoadSuccess={({ numPages }: any) =>
                 setNumPages(numPages)
               }
               file={url}
@@ -234,7 +234,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
               />
             </Document>
           </div>
-        </SimpleBar> */}
+        </SimpleBar>
       </div>
     </div>
   )

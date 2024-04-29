@@ -29,19 +29,19 @@ const UploadDropzone = ({
     useState<number>(0)
   const { toast } = useToast()
 
-  const { startUpload } = useUploadThing(
-    isSubscribed ? 'proPlanUploader' : 'freePlanUploader'
-  )
+  const { startUpload, permittedFileInfo } = useUploadThing(
+    "pdfUploader",
+  );
 
-//   const { mutate: startPolling } = trpc.getFile.useMutation(
-//     {
-//       onSuccess: (file) => {
-//         router.push(`/dashboard/${file.id}`)
-//       },
-//       retry: true,
-//       retryDelay: 500,
-//     }
-//   )
+  const { mutate: startPolling } = trpc.getFile.useMutation(
+    {
+      onSuccess: (file) => {
+        router.push(`/dashboard/${file.id}`)
+      },
+      retry: true,
+      retryDelay: 500,
+    }
+  )
 
   const startSimulatedProgress = () => {
     setUploadProgress(0)
@@ -93,7 +93,7 @@ const UploadDropzone = ({
         clearInterval(progressInterval)
         setUploadProgress(100)
 
-        // startPolling({ key })
+        startPolling({ key })
       }}>
       {({ getRootProps, getInputProps, acceptedFiles }) => (
         <div
