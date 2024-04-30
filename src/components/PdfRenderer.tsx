@@ -20,8 +20,7 @@ import { useState } from 'react'
 
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-
-// import { zodResolver } from '@hookform/resolvers/zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { cn } from '@/lib/utils'
 import {
   DropdownMenu,
@@ -73,10 +72,8 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
     defaultValues: {
       page: '1',
     },
-    // resolver: zodResolver(CustomPageValidator),
+    resolver: zodResolver(CustomPageValidator),
   })
-
-  console.log(errors)
 
   const { width, ref } = useResizeDetector()
 
@@ -201,7 +198,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
                   variant: 'destructive',
                 })
               }}
-              onLoadSuccess={({ numPages }: any) =>
+              onLoadSuccess={({ numPages }) =>
                 setNumPages(numPages)
               }
               file={url}
